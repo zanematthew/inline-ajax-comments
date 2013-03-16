@@ -79,7 +79,7 @@ $activate_fn = function(){
         if ( ! file_exists( $file['file'] ) ){
             wp_mkdir_p( dirname( $file['file'] ) );
 
-            file_put_contents( $file['file'], $file['desc'] );
+            @file_put_contents( $file['file'], $file['desc'] );
         }
     }
 };

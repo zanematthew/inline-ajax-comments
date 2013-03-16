@@ -35,7 +35,13 @@ Make sure that "Anyone can register" is checked in "Settings --> General"
 Users can add their "url" or "email" by clicking the "more" link next to the textarea.
 
 = Doesn't this prevent search engines from seeing comments? =
-No, it doesn't! Through the magic of Google's "AJAX Crawling" specification, search engines (currently Googlebot and Bingbot) will be made aware that the page includes AJAX-fetched content, and will request your page with a special URL that will have this plugin skip AJAX-generation and instead give the full HTML to the crawler.
+At the moment it does, [Google Ajax Crawling](https://developers.google.com/webmasters/ajax-crawling/docs/getting-started) will be added in a later version.
+
+= Does this work with Custom Post Types? =
+Yes
+
+= Does this work on Pages? =
+No
 
 == Screenshots ==
 1. As seen when user is logged in
