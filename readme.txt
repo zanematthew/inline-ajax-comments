@@ -22,9 +22,8 @@ This plugin places a comment form similar to Facebook, only displaying a single 
 
 == Installation ==
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
+1. Install the plugin via WordPress or download and upload the plugin to the `/wp-content/plugins/` 
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php if ( get_option('zm_ajax_comments_version') ) : zm_ajax_comments(); ?>` in your template where you want comments to load
 
 == Frequently Asked Questions ==
 
@@ -42,6 +41,9 @@ Yes
 
 = Does this work on Pages? =
 No
+
+= Does this support paging? =
+At the momemnt no, later versions might.
 
 == Screenshots ==
 1. As seen when user is logged in
