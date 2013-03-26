@@ -46,44 +46,18 @@ $activate_fn = function(){
 
     update_option( $my_unique_name['version_key'], $my_unique_name['version_value'] );
 
-    $date = date('F j, Y, g:i a');
-
-    $files = array(
-                array(
-                    'file' => plugin_dir_path( __FILE__ ) . 'admin/admin-tags.php',
-                    'desc' => "<?php\n/**\n * This file is automatically created for you. \n * The admin-tags.php file is where you should place all generic admin related functions. \n * \n * Created On: {$date} \n */"
-                ),
-                array(
-                    'file' => plugin_dir_path( __FILE__ ) . 'inc/template-tags.php',
-                    'desc' => "<?php\n/** \n * This file is automatically created for you. \n * The template-tags.php file is where you should place all generic template related functions. \n * \n * Created On: {$date} \n */"
-                ),
-                array(
-                    'file' => plugin_dir_path( __FILE__ ) . 'inc/functions.php',
-                    'desc' => "<?php\n/** \n * This file is automatically created for you. \n * The functions.php file is where you should place all generic misc. functions. \n * \n * Created On: {$date} \n */"
-                ),
-                array(
-                    'file' => plugin_dir_path( __FILE__ ) . 'inc/css/style.css',
-                    'desc' => "<?php\n/** \n * This file is automatically created for you. \n * The functions.php file is where you should place all generic misc. functions. \n * \n * Created On: {$date} \n */"
-                ),
-                array(
-                    'file' => plugin_dir_path( __FILE__ ) . 'inc/js/script.js',
-                    'desc' => "<?php\n/** \n * This file is automatically created for you. \n * The functions.php file is where you should place all generic misc. functions. \n * \n * Created On: {$date} \n */"
-                ),
-                array(
-                    'file' => plugin_dir_path( __FILE__ ) . 'readme.txt',
-                    'desc' => "\n=== My Plugin Name ===\n\nContributors:\nDonate link:\nTags:\nRequires at least:\nTested up to:\nStable tag:\nLicense:\nLicense URI:\n\n== Description ==\n\n== Installation ==\n\n== Frequently Asked Questions ==\n\n== Screenshots ==\n\n== Changelog =="
-                )
-          );
-
-    foreach( $files as $file ){
-        if ( ! file_exists( $file['file'] ) ){
-            wp_mkdir_p( dirname( $file['file'] ) );
-
-            @file_put_contents( $file['file'], $file['desc'] );
-        }
-    }
 };
 register_activation_hook( __FILE__, $activate_fn );
+
+
+/**
+ * Delete our version number from the database when the plugin is activated.
+ */
+$deactivate_fn = function (){
+    global $my_unique_name;
+    delete_option( $my_unique_name['version_key'] );
+};
+register_deactivation_hook( __FILE__, $deactivate_fn );
 
 
 /**
@@ -91,13 +65,6 @@ register_activation_hook( __FILE__, $activate_fn );
  */
 if ( file_exists( plugin_dir_path( __FILE__ ) . 'inc/functions.php' ) )
     require_once plugin_dir_path( __FILE__ ) . 'inc/functions.php';
-
-
-/**
- * Admin only functions
- */
-if ( is_admin() && file_exists( plugin_dir_path( __FILE__ ) . 'admin/admin-tags.php' ) )
-    require_once plugin_dir_path( __FILE__ ) . 'admin/admin-tags.php';
 
 
 /**
