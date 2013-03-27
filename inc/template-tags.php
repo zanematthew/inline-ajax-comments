@@ -27,7 +27,7 @@ add_action('plugins_loaded', 'inline_comments_loaded');
  * @since 0.1-alpha
  */
 function inline_comments_template_redirect() {
-    if ( is_single() ) {
+    if ( is_singular() ) {
         add_action( 'wp_enqueue_scripts', 'inline_comments_scripts');
         add_action( 'wp_head', 'inline_comments_head');
     }
@@ -75,7 +75,7 @@ function inline_comments_add_comment(){
 
     check_ajax_referer('inline_comments_nonce', 'security');
 
-    $comment = trim( $_POST['comment'] );
+    $comment = trim( esc_textarea( $_POST['comment'] ) );
 
     if ( empty( $comment ) ) die();
 
@@ -83,7 +83,7 @@ function inline_comments_add_comment(){
 
     $data = array(
         'comment_post_ID' => (int)$_POST['post_id'],
-        'comment_content' => esc_textarea( $comment ),
+        'comment_content' => $comment,
         'comment_type' => '',
         'comment_parent' => 0,
         'comment_author_IP' => $_SERVER['REMOTE_ADDR'],
@@ -101,14 +101,14 @@ function inline_comments_add_comment(){
 
         $data['user_id'] = $current_user->ID;
     } else {
-        $author_email = empty( $_POST['user_email'] ) ? null : $_POST['user_email'];
-        $author_url = empty( $_POST['user_url'] ) ? null : $_POST['user_url'];
-        $author_name = empty( $_POST['user_name'] ) ? null : $_POST['user_name'];
+        $author_email = empty( $_POST['user_email'] ) ? null : esc_attr( $_POST['user_email'] );
+        $author_url = empty( $_POST['user_url'] ) ? null : esc_url( $_POST['user_url'], array('http','https') );
+        $author_name = empty( $_POST['user_name'] ) ? null : esc_attr( $_POST['user_name'] );
     }
 
-    $data['comment_author'] = esc_attr( $author_name );
-    $data['comment_author_email'] = esc_attr( $author_email, '' );
-    $data['comment_author_url'] = esc_url( $author_url, array('http','https') );
+    $data['comment_author'] = $author_name;
+    $data['comment_author_email'] = $author_email;
+    $data['comment_author_url'] = $author_url;
 
     wp_insert_comment( $data );
 
@@ -126,7 +126,7 @@ function inline_comments_load_template(){
     check_ajax_referer('inline_comments_nonce', 'security');
 
     $comments = get_comments( array(
-        'post_id' => $_POST['post_id'],
+        'post_id' => (int)$_POST['post_id'],
         'number'  => 100,
         'status'  => 'approve',
         'order'   => 'ASC'
@@ -137,7 +137,6 @@ function inline_comments_load_template(){
                 <div class="inline-comments-p">
                     <?php inline_comments_profile_pic( $comment->comment_author_email ); ?>
                     <?php print $comment->comment_content; ?><br />
-                    <?php //print str_replace("\n", "<br />", $comment->comment_content); ?><br />
                     <time class="meta">
                         <strong><?php $user = get_user_by('login', $comment->comment_author ); if ( ! empty( $user->user_url ) ) : ?>
                             <a href="<?php print $user->user_url; ?>" target="_blank"><?php print $comment->comment_author; ?></a>

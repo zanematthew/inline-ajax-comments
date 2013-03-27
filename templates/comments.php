@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Our comments template, the form is actually loaded via ajax from within inline_comments_load_template()
+ * Our comments form template, the comments loop is loaded via html from inline_comments_load_template()
  */
 if ( ! is_single() ) return;
 if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly' );

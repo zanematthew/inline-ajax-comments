@@ -55,28 +55,19 @@ $deactivate_fn = function (){
 register_deactivation_hook( __FILE__, $deactivate_fn );
 
 
-/**
- * Shared functions between admin and theme
- */
-if ( file_exists( plugin_dir_path( __FILE__ ) . 'inc/functions.php' ) )
-    require_once plugin_dir_path( __FILE__ ) . 'inc/functions.php';
-
 
 /**
  * Theme only functions
  */
-if ( file_exists( plugin_dir_path( __FILE__ ) . 'inc/template-tags.php' ) )
-    require_once plugin_dir_path( __FILE__ ) . 'inc/template-tags.php';
+require_once plugin_dir_path( __FILE__ ) . 'inc/template-tags.php';
 
 
 $enqueue_scripts_fn = function(){
     $plugin_headers = get_file_data( __FILE__, array( 'Version' => 'Version', 'Name' => 'Plugin Name' ) );
-
     $clean_name = strtolower( str_replace( ' ', '-', $plugin_headers['Name'] ) );
-    wp_register_style( $clean_name . '-style', plugin_dir_url( __FILE__ ) . 'inc/css/style.css' );
 
+    wp_register_style( $clean_name . '-style', plugin_dir_url( __FILE__ ) . 'inc/css/style.css' );
     wp_register_script( 'textarea_auto_expand-script', plugin_dir_url( __FILE__ ) . 'vendor/textarea-auto-expand/jquery.textarea_auto_expand.js' );
     wp_register_script( $clean_name . '-script', plugin_dir_url( __FILE__ ) . 'inc/js/script.js', array('jquery', 'textarea_auto_expand-script') );
-
 };
 add_action('wp_enqueue_scripts', $enqueue_scripts_fn, 2);
