@@ -16,13 +16,15 @@ This plugin places a comment form similar to Facebook, only displaying a single 
 
 === Features ===
 * Single line textarea
+* Auto expanding textarea
 * AJAX submitted comments
 * AJAX loaded comments
+* Admin settings for additional styling
 
 
 == Installation ==
 
-1. Install the plugin via WordPress or download and upload the plugin to the `/wp-content/plugins/` 
+1. Install the plugin via WordPress or download and upload the plugin to the `/wp-content/plugins/`
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
@@ -49,6 +51,7 @@ At the momemnt no, later versions might.
 1. As seen when user is logged in
 1. Comments form with additional fields
 1. As seen when user is not logged in
+1. Admin settings
 
 == Changelog ==
 
