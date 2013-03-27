@@ -1,5 +1,7 @@
 jQuery(document).ready(function( $ ){
 
+    $('textarea').textareaAutoExpand();
+
     /**
      * Default ajax setup
      */
@@ -26,7 +28,6 @@ jQuery(document).ready(function( $ ){
                 if (typeof params.callback === "function") {
                     params.callback();
                 }
-                $('textarea').textareaAutoExpand();
             }
         });
     }
@@ -60,22 +61,18 @@ jQuery(document).ready(function( $ ){
                     "post_id": $( '#inline_comments_ajax_handle' ).attr( 'data-post_id' ),
                     "security": $( '#inline_comments_nonce' ).val()
                 }, false );
+                $('textarea').val('');
+                $this.css('opacity','1');
             }
         });
+
     });
 
     /**
      * Allow Comment form to be submitted when the user
      * presses the "enter" key.
      */
-    $( document )
-    // .filter('.submit-on-enter')
-    .on('keypress', '#default_add_comment_form textarea, #inline_comments_user_email, #inline_comments_user_url', function( event ){
-        // if ( event.keyCode == 13 && ! event.shiftKey && this.value.replace(/\s/g, '').length > 0) {
-        //     $('#default_add_comment_form').submit();
-        //     return false;
-        // }
-
+    $( document ).on('keypress', '#default_add_comment_form textarea, #default_add_comment_form input', function( event ){
         if ( event.keyCode == '13' ) {
             event.preventDefault();
             $('#default_add_comment_form').submit();
@@ -99,7 +96,6 @@ jQuery(document).ready(function( $ ){
                 success: function( msg ){
                     $( '.inline-comments-loading-icon').fadeOut();
                     $( "#inline_comments_ajax_target" ).fadeIn().html( msg ); // Give a smooth fade in effect
-                    $('textarea').textareaAutoExpand();
                 }
             });
         }

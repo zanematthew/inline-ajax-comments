@@ -47,6 +47,8 @@
 .inline-comments-container textarea {
     letter-spacing: 0.1em;
     height: 17px;
+    max-height: 17px;
+    min-height: 17px;
     width: 80%;
     resize: none;
     overflow: auto;

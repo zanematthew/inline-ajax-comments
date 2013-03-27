@@ -43,7 +43,6 @@ function inline_comments_template_redirect() {
  * @since 0.1-alpha
  */
 function inline_comments_scripts(){
-    // wp_enqueue_script( 'textarea_auto_expand' );
     wp_enqueue_script( 'ExpandingTextareas-script' );
     wp_enqueue_script( 'inline-ajax-comments-script' );
     wp_enqueue_style( 'inline-ajax-comments-style' );
@@ -84,7 +83,7 @@ function inline_comments_add_comment(){
 
     $data = array(
         'comment_post_ID' => (int)$_POST['post_id'],
-        'comment_content' => wp_kses( $comment, '' ),
+        'comment_content' => esc_textarea( $comment ),
         'comment_type' => '',
         'comment_parent' => 0,
         'comment_author_IP' => $_SERVER['REMOTE_ADDR'],
@@ -107,9 +106,9 @@ function inline_comments_add_comment(){
         $author_name = empty( $_POST['user_name'] ) ? null : $_POST['user_name'];
     }
 
-    $data['comment_author'] = $author_name;
-    $data['comment_author_email'] = wp_kses( $author_email, '' );
-    $data['comment_author_url'] = wp_kses( $author_url, '' );
+    $data['comment_author'] = esc_attr( $author_name );
+    $data['comment_author_email'] = esc_attr( $author_email, '' );
+    $data['comment_author_url'] = esc_url( $author_url, array('http','https') );
 
     wp_insert_comment( $data );
 
@@ -131,30 +130,14 @@ function inline_comments_load_template(){
         'number'  => 100,
         'status'  => 'approve',
         'order'   => 'ASC'
-    ) );
-
-
-    $name = 'Name&#8230';
-    $email = 'Email&#8230';
-    $website = 'Website&#8230';
-    $user_email = null;
-    $user_website = null;
-    $user_name = null;
-
-    if ( is_user_logged_in() ){
-        $current_user = wp_get_current_user();
-        $user_name = $current_user->user_nicename;
-        $user_email = $current_user->user_email;
-        $user_website = $current_user->user_url;
-    }
-
-    ?>
+    ) ); ?>
     <div class="inline-comments-container" id="comments_target">
         <?php if ( $comments ) : foreach( $comments as $comment) : ?>
             <div class="inline-comments-content">
                 <div class="inline-comments-p">
                     <?php inline_comments_profile_pic( $comment->comment_author_email ); ?>
-                    <?php print str_replace("\n", "<br />", $comment->comment_content); ?><br />
+                    <?php print $comment->comment_content; ?><br />
+                    <?php //print str_replace("\n", "<br />", $comment->comment_content); ?><br />
                     <time class="meta">
                         <strong><?php $user = get_user_by('login', $comment->comment_author ); if ( ! empty( $user->user_url ) ) : ?>
                             <a href="<?php print $user->user_url; ?>" target="_blank"><?php print $comment->comment_author; ?></a>
@@ -165,28 +148,6 @@ function inline_comments_load_template(){
                 </div>
             </div>
         <?php endforeach; endif; ?>
-
-        <?php if ( get_option('comment_registration') != 1 || is_user_logged_in() ) : ?>
-            <div class="inline-comments-content">
-                <div class="inline-comments-p">
-                    <form action="javascript://" method="POST" id="default_add_comment_form">
-                        <input type="hidden" name="inline_comments_nonce" value="<?php print wp_create_nonce('inline_comments_nonce'); ?>" id="inline_comments_nonce" />
-                        <?php inline_comments_profile_pic(); ?>
-                        <textarea placeholder="Press enter to send&#8230;" tabindex="4" id="comment" name="comment" class="inline-comments-auto-expand submit-on-enter multiple-lines-no-box-sizing"></textarea>
-                        <span class="inline-comments-more-handle"><a href="#">more</a></span>
-                        <div class="inline-comments-more-container" <?php if ($user_email != null ) : ?>style="display: none;"<?php endif; ?>>
-                            <div class="inline-comments-field"><input type="text" tabindex="5" name="user_name" id="inline_comments_user_name" placeholder="<?php print $name; ?>" value="<?php print $user_name; ?>"  /></div>
-                            <div class="inline-comments-field"><input type="email" required tabindex="5" name="user_email" id="inline_comments_user_email" placeholder="<?php print $email; ?>" value="<?php print $user_email; ?>"  /></div>
-                            <div class="inline-comments-field"><input type="url" required tabindex="6" name="user_url" id="inline_comments_user_url" placeholder="<?php print $website; ?>" value="<?php print $user_website; ?>" /></div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        <?php else : ?>
-            <div class="callout-container">
-                <p>Please <?php echo wp_register('','', false); ?> or <a href="<?php print wp_login_url(); ?>" class="inline-comments-login-handle">Login</a> to leave Comments</p>
-            </div>
-        <?php endif; ?>
     </div>
     <?php die();
 }
