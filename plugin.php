@@ -12,11 +12,6 @@
  */
 
 
-/***********************************************
- * YOU SHOULD NOT HAVE TO EDIT BELOW THIS LINE *
- ***********************************************/
-
-
 /**
  * From the WordPress plugin headers above we derive the version number, and plugin name
  */
@@ -79,6 +74,9 @@ $enqueue_scripts_fn = function(){
 
     $clean_name = strtolower( str_replace( ' ', '-', $plugin_headers['Name'] ) );
     wp_register_style( $clean_name . '-style', plugin_dir_url( __FILE__ ) . 'inc/css/style.css' );
-    wp_register_script( $clean_name . '-script', plugin_dir_url( __FILE__ ) . 'inc/js/script.js', array('jquery') );
+
+    wp_register_script( 'textarea_auto_expand-script', plugin_dir_url( __FILE__ ) . 'vendor/textarea-auto-expand/jquery.textarea_auto_expand.js' );
+    wp_register_script( $clean_name . '-script', plugin_dir_url( __FILE__ ) . 'inc/js/script.js', array('jquery', 'textarea_auto_expand-script') );
+
 };
 add_action('wp_enqueue_scripts', $enqueue_scripts_fn, 2);

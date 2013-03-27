@@ -10,8 +10,6 @@
     height: 32px;
     width: 32px;
     background: url('ajax-loader.gif') no-repeat center center;
-    height: 32px;
-    width: 32px;
     }
 
 .inline-comments-profile-pic:last-child {
@@ -50,6 +48,9 @@
     letter-spacing: 0.1em;
     height: 17px;
     width: 80%;
+    resize: none;
+    overflow: auto;
+    vertical-align: top;
     }
 
 .inline-comments-container time {
@@ -66,7 +67,7 @@
     }
 
 .inline-comments-more-container .inline-comments-field input[type="text"]{
-    width: 200px;
+    width: 162px;
     }
 
 .inline-comments-more-container .inline-comments-field:last-child {
@@ -86,5 +87,4 @@
     left: 5px;
     position: relative;
     text-transform: uppercase;
-    top: -11px;
     }

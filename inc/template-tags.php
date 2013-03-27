@@ -43,6 +43,8 @@ function inline_comments_template_redirect() {
  * @since 0.1-alpha
  */
 function inline_comments_scripts(){
+    // wp_enqueue_script( 'textarea_auto_expand' );
+    wp_enqueue_script( 'ExpandingTextareas-script' );
     wp_enqueue_script( 'inline-ajax-comments-script' );
     wp_enqueue_style( 'inline-ajax-comments-style' );
 }
@@ -74,40 +76,43 @@ function inline_comments_add_comment(){
 
     check_ajax_referer('inline_comments_nonce', 'security');
 
-    if ( empty( $_POST['comment'] ) ) return;
+    $comment = trim( $_POST['comment'] );
 
-    // Only logged in users
-    if ( get_option('comment_registration') == 1 && ! is_user_logged_in() ) {
-        die('only logged in');
-    }
-    // Anyone, attempt to find email and url
-    else {
-        $author_email = empty( $_POST['user_email'] ) ? null : $_POST['user_email'];
-        $author_url = empty( $_POST['user_email'] ) ? null : $_POST['user_url'];
-    }
+    if ( empty( $comment ) ) die();
+
+    if ( get_option('comment_registration') == 1 && ! is_user_logged_in() ) die();
+
+    $data = array(
+        'comment_post_ID' => (int)$_POST['post_id'],
+        'comment_content' => wp_kses( $comment, '' ),
+        'comment_type' => '',
+        'comment_parent' => 0,
+        'comment_author_IP' => $_SERVER['REMOTE_ADDR'],
+        'comment_agent' => $_SERVER['HTTP_USER_AGENT'],
+        'comment_date' => current_time('mysql'),
+        'comment_approved' => 1
+    );
 
     if ( is_user_logged_in() ){
         $current_user = wp_get_current_user();
 
         $author_email = $current_user->user_email;
         $author_url = $current_user->user_url;
+        $author_name = $current_user->user_nicename;
 
         $data['user_id'] = $current_user->ID;
-        $data['comment_author'] = $current_user->user_nicename;
+    } else {
+        $author_email = empty( $_POST['user_email'] ) ? null : $_POST['user_email'];
+        $author_url = empty( $_POST['user_url'] ) ? null : $_POST['user_url'];
+        $author_name = empty( $_POST['user_name'] ) ? null : $_POST['user_name'];
     }
 
-    $data['comment_post_ID']      = (int)$_POST['post_id'];
+    $data['comment_author'] = $author_name;
     $data['comment_author_email'] = wp_kses( $author_email, '' );
-    $data['comment_author_url']   = wp_kses( $author_url, '' );
-    $data['comment_content']      = wp_kses( $_POST['comment'], '' );
-    $data['comment_type']         = '';
-    $data['comment_parent']       = 0;
-    $data['comment_author_IP']    = $_SERVER['REMOTE_ADDR'];
-    $data['comment_agent']        = $_SERVER['HTTP_USER_AGENT'];
-    $data['comment_date']         = current_time('mysql');
-    $data['comment_approved']     = 1;
+    $data['comment_author_url'] = wp_kses( $author_url, '' );
 
     wp_insert_comment( $data );
+
     die();
 }
 
@@ -134,10 +139,11 @@ function inline_comments_load_template(){
     $website = 'Website&#8230';
     $user_email = null;
     $user_website = null;
+    $user_name = null;
 
     if ( is_user_logged_in() ){
         $current_user = wp_get_current_user();
-        $name = $current_user->user_nicename;
+        $user_name = $current_user->user_nicename;
         $user_email = $current_user->user_email;
         $user_website = $current_user->user_url;
     }
@@ -166,11 +172,12 @@ function inline_comments_load_template(){
                     <form action="javascript://" method="POST" id="default_add_comment_form">
                         <input type="hidden" name="inline_comments_nonce" value="<?php print wp_create_nonce('inline_comments_nonce'); ?>" id="inline_comments_nonce" />
                         <?php inline_comments_profile_pic(); ?>
-                        <textarea placeholder="Press enter to send&#8230;" tabindex="4" rows="1" cols="85" id="comment" name="comment" class="meta"></textarea>
+                        <textarea placeholder="Press enter to send&#8230;" tabindex="4" id="comment" name="comment" class="inline-comments-auto-expand submit-on-enter multiple-lines-no-box-sizing"></textarea>
                         <span class="inline-comments-more-handle"><a href="#">more</a></span>
                         <div class="inline-comments-more-container" <?php if ($user_email != null ) : ?>style="display: none;"<?php endif; ?>>
-                            <div class="inline-comments-field"><input type="text" tabindex="5" name="user_email" id="inline_comments_user_email" placeholder="<?php print $email; ?>" value="<?php print $user_email; ?>"  /></div>
-                            <div class="inline-comments-field"><input type="text" tabindex="6" name="user_url" id="inline_comments_user_url" placeholder="<?php print $website; ?>" value="<?php print $user_website; ?>" /></div>
+                            <div class="inline-comments-field"><input type="text" tabindex="5" name="user_name" id="inline_comments_user_name" placeholder="<?php print $name; ?>" value="<?php print $user_name; ?>"  /></div>
+                            <div class="inline-comments-field"><input type="email" required tabindex="5" name="user_email" id="inline_comments_user_email" placeholder="<?php print $email; ?>" value="<?php print $user_email; ?>"  /></div>
+                            <div class="inline-comments-field"><input type="url" required tabindex="6" name="user_url" id="inline_comments_user_url" placeholder="<?php print $website; ?>" value="<?php print $user_website; ?>" /></div>
                         </div>
                     </form>
                 </div>

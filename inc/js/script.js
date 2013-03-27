@@ -5,8 +5,10 @@ jQuery(document).ready(function( $ ){
      */
     $.ajaxSetup({
         type: "POST",
-        url: ajaxurl
+        url: ajaxurl,
+        dataType: "html"
     });
+
 
     window.inline_comments_ajax_load_template = function( params, my_global ) {
 
@@ -24,6 +26,7 @@ jQuery(document).ready(function( $ ){
                 if (typeof params.callback === "function") {
                     params.callback();
                 }
+                $('textarea').textareaAutoExpand();
             }
         });
     }
@@ -32,13 +35,16 @@ jQuery(document).ready(function( $ ){
      * Submit new comment, note comments are loaded via ajax
      */
      $( document ).on( 'submit', '#default_add_comment_form', function( event ){
-        $(this).css('opacity','0.5');
         event.preventDefault();
+
+        var $this = $(this);
+        $this.css('opacity','0.5');
 
         data = {
             action: "inline_comments_add_comment",
             post_id: $('#inline_comments_ajax_handle').attr( 'data-post_id' ),
-            user_email: $('#zm_user_email').val(),
+            user_name: $('#inline_comments_user_name').val(),
+            user_email: $('#inline_comments_user_email').val(),
             user_url: $('#inline_comments_user_url').val(),
             comment: $( '#comment' ).val(),
             security: $('#inline_comments_nonce').val()
@@ -62,7 +68,14 @@ jQuery(document).ready(function( $ ){
      * Allow Comment form to be submitted when the user
      * presses the "enter" key.
      */
-    $( document ).on('keypress', '#default_add_comment_form textarea, #inline_comments_user_email, #inline_comments_user_url', function( event ){
+    $( document )
+    // .filter('.submit-on-enter')
+    .on('keypress', '#default_add_comment_form textarea, #inline_comments_user_email, #inline_comments_user_url', function( event ){
+        // if ( event.keyCode == 13 && ! event.shiftKey && this.value.replace(/\s/g, '').length > 0) {
+        //     $('#default_add_comment_form').submit();
+        //     return false;
+        // }
+
         if ( event.keyCode == '13' ) {
             event.preventDefault();
             $('#default_add_comment_form').submit();
@@ -86,6 +99,7 @@ jQuery(document).ready(function( $ ){
                 success: function( msg ){
                     $( '.inline-comments-loading-icon').fadeOut();
                     $( "#inline_comments_ajax_target" ).fadeIn().html( msg ); // Give a smooth fade in effect
+                    $('textarea').textareaAutoExpand();
                 }
             });
         }
