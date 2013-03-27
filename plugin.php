@@ -55,6 +55,8 @@ $deactivate_fn = function (){
 register_deactivation_hook( __FILE__, $deactivate_fn );
 
 
+if ( is_admin() )
+    require_once plugin_dir_path( __FILE__ ) . 'admin/admin-tags.php';
 
 /**
  * Theme only functions

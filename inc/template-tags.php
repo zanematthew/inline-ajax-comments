@@ -56,6 +56,7 @@ function inline_comments_scripts(){
  */
 function inline_comments_head(){
     print '<script type="text/javascript"> var ajaxurl = "'. admin_url("admin-ajax.php") .'";</script>';
+    print '<style type="text/css">'.get_option('additional_styling').'</style>';
 }
 
 
@@ -75,7 +76,7 @@ function inline_comments_add_comment(){
 
     check_ajax_referer('inline_comments_nonce', 'security');
 
-    $comment = trim( esc_textarea( $_POST['comment'] ) );
+    $comment = trim( wp_kses( $_POST['comment'], '' ) );
 
     if ( empty( $comment ) ) die();
 
