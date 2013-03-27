@@ -1,6 +1,6 @@
 jQuery(document).ready(function( $ ){
 
-    $('textarea').textareaAutoExpand();
+    $('#default_add_comment_form textarea').textareaAutoExpand();
 
     /**
      * Default ajax setup
