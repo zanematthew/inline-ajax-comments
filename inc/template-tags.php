@@ -122,8 +122,7 @@ function inline_comments_load_template(){
     check_ajax_referer('inline_comments_nonce', 'security');
 
     $comments = get_comments( array(
-        'post_id' => $_POST['post_id']
-        ,
+        'post_id' => $_POST['post_id'],
         'number'  => 100,
         'status'  => 'approve',
         'order'   => 'ASC'
