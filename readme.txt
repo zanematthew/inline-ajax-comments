@@ -14,7 +14,7 @@ Displays a single line textarea for entering comments, users can press "enter/re
 
 This plugin places a comment form similar to Facebook, only displaying a single line textarea, which submits when the user presses "enter/return" on their keyboard.
 
-=== Features ===
+= Features =
 * Single line textarea
 * Auto expanding textarea
 * AJAX submitted comments
@@ -25,7 +25,7 @@ This plugin places a comment form similar to Facebook, only displaying a single 
 == Installation ==
 
 1. Install the plugin via WordPress or download and upload the plugin to the `/wp-content/plugins/`
-1. Activate the plugin through the 'Plugins' menu in WordPress
+2. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
 
@@ -49,11 +49,16 @@ At the momemnt no, later versions might.
 
 == Screenshots ==
 1. As seen when user is logged in
-1. Comments form with additional fields
-1. As seen when user is not logged in
-1. Admin settings
+2. Comments form with additional fields
+3. As seen when user is not logged in
+4. Admin settings
+
+== Upgrade Notice ==
 
 == Changelog ==
 
-= 1.0 =
+= 0.1 =
+* Readme.txt updates
+
+= 0.1-alpha =
 * Initial version
