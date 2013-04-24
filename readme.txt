@@ -1,5 +1,5 @@
 === Inline Ajax Comments ===
-Contributors: zanematthew
+Contributors: ZaneMatthew
 Donate link: http://zanematthew.com/
 Tags: comments, ajax, inline
 Requires at least: 3.5
@@ -45,20 +45,19 @@ Yes
 No
 
 = Does this support paging? =
-At the momemnt no, later versions might.
+At the moment no, later versions might.
 
 == Screenshots ==
+
 1. As seen when user is logged in
-2. Comments form with additional fields
+2. Admin settings
 3. As seen when user is not logged in
-4. Admin settings
 
 == Upgrade Notice ==
 
-== Changelog ==
+* Check settings
 
-= 0.1 =
-* Readme.txt updates
+== Changelog ==
 
 = 0.1-alpha =
 * Initial version
