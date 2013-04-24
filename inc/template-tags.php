@@ -43,7 +43,6 @@ function inline_comments_template_redirect() {
  * @since 0.1-alpha
  */
 function inline_comments_scripts(){
-    wp_enqueue_script( 'ExpandingTextareas-script' );
     wp_enqueue_script( 'inline-ajax-comments-script' );
     wp_enqueue_style( 'inline-ajax-comments-style' );
 }

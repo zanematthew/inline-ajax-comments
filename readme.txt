@@ -58,6 +58,9 @@ At the moment no, later versions might.
 * Check settings
 
 == Changelog ==
+= 1.1 =
+* Removing dynamic functions for older PHP support
+* Removing dead code
 
 = 0.1-alpha =
 * Initial version
