@@ -58,6 +58,11 @@ At the moment no, later versions might.
 * Check settings
 
 == Changelog ==
+
+= 1.2 =
+* Comments now work on Pages (not just posts)
+* Adding a setting to keep the 'more' section open
+
 = 1.1 =
 * Removing dynamic functions for older PHP support
 * Removing dead code
