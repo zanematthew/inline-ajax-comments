@@ -12,6 +12,7 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
     $user_email = null;
     $user_website = null;
     $user_name = null;
+    $keep_open = get_option('keep_open');
 
     if ( is_user_logged_in() ){
         $current_user = wp_get_current_user();
@@ -34,7 +35,7 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
                     <?php inline_comments_profile_pic(); ?>
                     <textarea placeholder="Press enter to submit comment&#8230;" tabindex="4" id="comment" name="comment" id="inline-comments-textarea" class="inline-comments-auto-expand submit-on-enter"></textarea>
                     <span class="inline-comments-more-handle"><a href="#">more</a></span>
-                    <div class="inline-comments-more-container" <?php if ($user_email != null ) : ?>style="display: none;"<?php endif; ?>>
+                    <div class="inline-comments-more-container" <?php if ( $user_email != null && isset( $keep_open ) && $keep_open != "on" ) : ?>style="display: none;"<?php endif; ?>>
                         <div class="inline-comments-field"><input type="text" tabindex="5" name="user_name" id="inline_comments_user_name" placeholder="<?php print $name; ?>" value="<?php print $user_name; ?>"  /></div>
                         <div class="inline-comments-field"><input type="email" required tabindex="5" name="user_email" id="inline_comments_user_email" placeholder="<?php print $email; ?>" value="<?php print $user_email; ?>"  /></div>
                         <div class="inline-comments-field"><input type="url" required tabindex="6" name="user_url" id="inline_comments_user_url" placeholder="<?php print $website; ?>" value="<?php print $user_website; ?>" /></div>

@@ -15,7 +15,8 @@ add_action('admin_menu','inline_comments_admin_menu');
 
 function inline_comments_admin_init(){
     $fields = array(
-            'additional_styling'
+            'additional_styling',
+            'keep_open'
             );
 
     foreach( $fields as $field ) {
