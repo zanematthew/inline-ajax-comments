@@ -28,7 +28,7 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
     <div class="inline-comments-loading-icon">Loading Comments&#8230;</div>
     <input type="hidden" name="inline_comments_nonce" value="<?php print wp_create_nonce('inline_comments_nonce'); ?>" id="inline_comments_nonce" />
     <?php if ( get_option('comment_registration') != 1 || is_user_logged_in() ) : ?>
-        <div class="inline-comments-content">
+        <div class="inline-comments-content inline-comments-content-comment-fields">
             <div class="inline-comments-p">
                 <form action="javascript://" method="POST" id="default_add_comment_form">
                     <input type="hidden" name="inline_comments_nonce" value="<?php print wp_create_nonce('inline_comments_nonce'); ?>" id="inline_comments_nonce" />

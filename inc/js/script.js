@@ -1,6 +1,6 @@
 jQuery(document).ready(function( $ ){
 
-    $('#default_add_comment_form textarea').textareaAutoExpand();
+    // $('#default_add_comment_form textarea').textareaAutoExpand();
 
     /**
      * Default ajax setup
@@ -96,7 +96,19 @@ jQuery(document).ready(function( $ ){
                 success: function( msg ){
                     $( '.inline-comments-loading-icon').fadeOut();
                     $( "#inline_comments_ajax_target" ).fadeIn().html( msg ); // Give a smooth fade in effect
+                    if ( location.hash ){
+                        $('html, body').animate({
+                            scrollTop: $( location.hash ).offset().top
+                        });
+                        $( location.hash ).addClass( 'inline-comments-highlight' );
+                    }
                 }
+            });
+
+            $( document ).on('click', '.inline-comments-time-handle', function( e ){
+                $( '.inline-comments-content' ).removeClass('inline-comments-highlight')
+                comment_id = '#comment-' + $( this ).attr('data-comment_id');
+                $( comment_id ).addClass('inline-comments-highlight');
             });
         }
     });

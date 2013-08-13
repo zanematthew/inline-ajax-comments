@@ -133,16 +133,13 @@ function inline_comments_load_template(){
     ) ); ?>
     <div class="inline-comments-container" id="comments_target">
         <?php if ( $comments ) : foreach( $comments as $comment) : ?>
-            <div class="inline-comments-content">
+            <div class="inline-comments-content" id="comment-<?php echo $comment->comment_ID; ?>">
                 <div class="inline-comments-p">
                     <?php inline_comments_profile_pic( $comment->comment_author_email ); ?>
                     <?php print $comment->comment_content; ?><br />
                     <time class="meta">
-                        <strong><?php $user = get_user_by('login', $comment->comment_author ); if ( ! empty( $user->user_url ) ) : ?>
-                            <a href="<?php print $user->user_url; ?>" target="_blank"><?php print $comment->comment_author; ?></a>
-                        <?php else : ?>
-                            <?php print $comment->comment_author; ?>
-                        <?php endif; ?></strong> <?php print human_time_diff( strtotime( $comment->comment_date ), current_time('timestamp') ); ?> ago.
+                        <strong><?php $user = get_user_by('login', $comment->comment_author ); if ( ! empty( $user->user_url ) ) : ?><a href="<?php print $user->user_url; ?>" target="_blank"><?php print $comment->comment_author; ?></a><?php else : ?><?php print $comment->comment_author; ?><?php endif; ?></strong>
+                        <a href="<?php echo get_permalink( $comment->comment_post_ID); ?>#<?php echo $comment->comment_ID; ?>" class="inline-comments-time-handle" data-comment_id="<?php echo $comment->comment_ID; ?>"><?php print human_time_diff( strtotime( $comment->comment_date ), current_time('timestamp') ); ?> ago.</a>
                     </time>
                 </div>
             </div>

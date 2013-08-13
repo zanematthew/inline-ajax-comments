@@ -27,21 +27,20 @@
 
 .inline-comments-container .inline-comments-p {
     float: left;
-    font: normal 12px/1.2em helvetica, sans-serif;
+    font: normal 12px/1.5em helvetica, sans-serif;
     padding: 10px;
     margin: 0;
     width: 97%;
     }
 
 .inline-comments-container .inline-comments-content {
-    border-top: 1px solid #fff;
     border-bottom: 1px solid #ddd;
     float: left;
     width: 100%;
     }
 
 .inline-comments-container .inline-comments-content:first-child {
-    border-top: 1px solid #ddd;
+    /*border-top: 1px solid #ddd;*/
     }
 
 .inline-comments-container textarea {
@@ -88,4 +87,40 @@
     left: 5px;
     position: relative;
     text-transform: uppercase;
+    }
+
+
+.inline-comments-content *:focus {
+    outline: none;
+    }
+
+.inline-comments-content input[type="url"],
+.inline-comments-content input[type="email"],
+.inline-comments-content input[type="text"],
+.inline-comments-content textarea {
+    border: 1px solid #BBB;
+    font: normal 13px/1 Helvetica, sans-serif, arial;
+    padding: 6px;
+    }
+
+.inline-comments-more-container .inline-comments-field input[type="text"],
+.inline-comments-more-container .inline-comments-field input[type="email"],
+.inline-comments-more-container .inline-comments-field input[type="url"] {margin: 5px 0 0; width: 127px;}
+
+
+.inline-comments-content input[type="text"]:hover,
+.inline-comments-content textarea:hover {
+    border: 1px solid #333;
+    }
+
+.inline-comments-content-comment-fields {
+    background: rgba(0, 0, 0, 0.04);
+    }
+
+#comments_target {
+    border-top: 1px solid #ddd;
+    }
+
+.inline-comments-highlight {
+    background: #ffff99;
     }
