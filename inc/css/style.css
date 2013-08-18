@@ -44,7 +44,6 @@
     }
 
 .inline-comments-container textarea {
-    letter-spacing: 0.1em;
     height: 17px;
     min-height: 17px;
     width: 80%;
@@ -55,6 +54,9 @@
 
 .inline-comments-container time {
     font: normal 11px/1 helvetica, sans-serif;
+    background: rgba(255, 235, 205, 0.39);
+    margin: 10px 0 0;
+    float: left;
     }
 
 .inline-comments-more-container {
@@ -99,7 +101,7 @@
 .inline-comments-content input[type="text"],
 .inline-comments-content textarea {
     border: 1px solid #BBB;
-    font: normal 13px/1 Helvetica, sans-serif, arial;
+    font: normal 13px/1.3em Helvetica, sans-serif, arial;
     padding: 6px;
     }
 
@@ -122,5 +124,32 @@
     }
 
 .inline-comments-highlight {
-    background: #ffff99;
+    background: #FFFFD7;
+    }
+
+
+.inline-comments-annon {}
+.inline-comments-administrator {
+    border-left: 2px solid #F00;
+    margin-left: -2px;
+    }
+
+.inline-comments-subscriber {}
+
+.inline-comments-allowed-tags-container {
+    word-wrap: normal;
+    margin: 5px 50px 5px 0;
+    color: #C0C0C0;
+    font-weight: 300;
+    text-shadow: 1px 1px 0 #FFF;
+    }
+
+
+.inline-comments-content blockquote {
+    font-style: italic;
+    border-left: 1px solid #DDD;
+    float: left;
+    padding: 3px 10px;
+    margin: 5px 0;
+    color: #888;
     }

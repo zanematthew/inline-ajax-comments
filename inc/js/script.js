@@ -115,6 +115,14 @@ jQuery(document).ready(function( $ ){
 
     $( document ).on('click', '.inline-comments-more-handle', function( event ){
         event.preventDefault();
+        if ( $( this ).hasClass('inline-comments-more-open') ){
+            $( 'a', this ).html('more');
+            $('#comment').css('height', '0');
+        } else {
+            $( 'a', this ).html('less');
+            $('#comment').css('height', '150');
+        }
+        $( this ).toggleClass('inline-comments-more-open');
         $('.inline-comments-more-container').toggle();
     });
 });

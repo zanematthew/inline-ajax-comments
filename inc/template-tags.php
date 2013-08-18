@@ -75,7 +75,21 @@ function inline_comments_add_comment(){
 
     check_ajax_referer('inline_comments_nonce', 'security');
 
-    $comment = trim( wp_kses( $_POST['comment'], '' ) );
+    $comment = trim(
+            wp_kses( $_POST['comment'],
+            array(
+                'a' => array(
+                    'href'  => array(),
+                    'title' => array()
+                ),
+                'br'         => array(),
+                'em'         => array(),
+                'strong'     => array(),
+                'blockquote' => array(),
+                'code'       => array()
+            )
+        )
+    );
 
     if ( empty( $comment ) ) die();
 
@@ -130,10 +144,23 @@ function inline_comments_load_template(){
         'number'  => 100,
         'status'  => 'approve',
         'order'   => 'ASC'
-    ) ); ?>
+    ) );
+
+    ?>
     <div class="inline-comments-container" id="comments_target">
         <?php if ( $comments ) : foreach( $comments as $comment) : ?>
-            <div class="inline-comments-content" id="comment-<?php echo $comment->comment_ID; ?>">
+            <?php
+            $user = new WP_User( $comment->user_id );
+            $class = null;
+            if ( ! empty( $user->roles ) && is_array( $user->roles ) ) {
+                foreach ( $user->roles as $role ){
+                    $class = $role;
+                }
+            } else {
+                $class = 'annon';
+            }
+            ?>
+            <div class="inline-comments-content inline-comments-<?php echo $class; ?>" id="comment-<?php echo $comment->comment_ID; ?>">
                 <div class="inline-comments-p">
                     <?php inline_comments_profile_pic( $comment->comment_author_email ); ?>
                     <?php print $comment->comment_content; ?><br />

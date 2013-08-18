@@ -59,6 +59,14 @@ At the moment no, later versions might.
 
 == Changelog ==
 
+= 1.2.1 =
+* Enhancement: Comment area now toggles from 1 line to multi-line
+* Enhancement: The following `html` tags are now allowed `<a href="" title="">`, `<blockquote>`, `<code>`, `<em>`, `<strong>`
+* Enhancement: Added additional styling for post authors
+* Enhancement: User name links to their website
+* Enhancement: You can now share direct links to comments
+* Enhancement: Added setting to keep comment box open
+
 = 1.2 =
 * Comments now work on Pages (not just posts)
 * Adding a setting to keep the 'more' section open
