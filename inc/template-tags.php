@@ -106,6 +106,10 @@ function inline_comments_add_comment(){
         'comment_approved' => 1
     );
 
+
+    /**
+     * If user logged in build our array of info
+     */
     if ( is_user_logged_in() ){
         $current_user = wp_get_current_user();
 
@@ -114,7 +118,22 @@ function inline_comments_add_comment(){
         $author_name = $current_user->user_nicename;
 
         $data['user_id'] = $current_user->ID;
-    } else {
+    }
+
+    /**
+     * Or by email
+     */
+    elseif( $user = get_user_by( 'email', $_POST['user_email'] ) ) {
+        $data['user_id'] = $user->data->ID;
+        $author_email = $user->data->user_email;
+        $author_url = $user->data->user_url;
+        $author_name = $user->data->user_nicename;
+    }
+
+    /**
+     * Or do the following
+     */
+    else {
         $author_email = empty( $_POST['user_email'] ) ? null : esc_attr( $_POST['user_email'] );
         $author_url = empty( $_POST['user_url'] ) ? null : esc_url( $_POST['user_url'], array('http','https') );
         $author_name = empty( $_POST['user_name'] ) ? null : esc_attr( $_POST['user_name'] );

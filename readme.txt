@@ -59,6 +59,9 @@ At the moment no, later versions might.
 
 == Changelog ==
 
+= 1.2.2 =
+* Tweak: Improved reliability in css classes by user role
+
 = 1.2.1 =
 * Enhancement: Comment area now toggles from 1 line to multi-line
 * Enhancement: The following `html` tags are now allowed `<a href="" title="">`, `<blockquote>`, `<code>`, `<em>`, `<strong>`
