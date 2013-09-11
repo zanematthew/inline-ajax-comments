@@ -16,7 +16,7 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
 
     if ( is_user_logged_in() ){
         $current_user = wp_get_current_user();
-        $user_name = $current_user->user_nicename;
+        $user_name = $current_user->display_name;
         $user_email = $current_user->user_email;
         $user_website = $current_user->user_url;
     }
