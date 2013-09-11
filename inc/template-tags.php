@@ -115,7 +115,7 @@ function inline_comments_add_comment(){
 
         $author_email = $current_user->user_email;
         $author_url = $current_user->user_url;
-        $author_name = $current_user->user_nicename;
+        $author_name = $current_user->display_name;
 
         $data['user_id'] = $current_user->ID;
     }
@@ -127,7 +127,7 @@ function inline_comments_add_comment(){
         $data['user_id'] = $user->data->ID;
         $author_email = $user->data->user_email;
         $author_url = $user->data->user_url;
-        $author_name = $user->data->user_nicename;
+        $author_name = $user->data->display_name;
     }
 
     /**
