@@ -95,7 +95,7 @@ jQuery(document).ready(function( $ ){
                 data: data,
                 success: function( msg ){
                     $( '.inline-comments-loading-icon').fadeOut();
-                    $( "#inline_comments_ajax_target" ).fadeIn().html( msg ); // Give a smooth fade in effect
+					$( "#inline_comments_ajax_target_"+data.post_id).fadeIn().html( msg ); // Give a smooth fade in effect
                     if ( location.hash ){
                         $('html, body').animate({
                             scrollTop: $( location.hash ).offset().top

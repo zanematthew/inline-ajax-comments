@@ -21,10 +21,11 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
         $user_website = $current_user->user_url;
     }
 ?>
+
 <noscript>JavaScript is required to load the comments.</noscript>
-<div class="inline-comments-container" name="comments">
+<div class="inline-comments-container" name="comments" onLoad="inline_comments_ajax_load">
     <div id="inline_comments_ajax_handle" class="last-child" data-post_id="<?php echo $post->ID; ?>">
-    <div id="inline_comments_ajax_target" style="display: none;"></div>
+    <div id="inline_comments_ajax_target_<?php echo $post->ID; ?>" style="display: none;" ></div>
     <div class="inline-comments-loading-icon">Loading Comments&#8230;</div>
     <input type="hidden" name="inline_comments_nonce" value="<?php print wp_create_nonce('inline_comments_nonce'); ?>" id="inline_comments_nonce" />
     <?php if ( get_option('comment_registration') != 1 || is_user_logged_in() ) : ?>
