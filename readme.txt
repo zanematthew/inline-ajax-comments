@@ -59,7 +59,10 @@ At the moment no, later versions might.
 
 == Changelog ==
 
-= 1.2.4.2 =
+= 1.2.4.3m =
+* Fix: Allow for use ANYWHERE 
+
+= 1.2.4.2m =
 * Fix: Changed "user_nicename" (deprecated) to "display_name"
 
 = 1.2.4m =
