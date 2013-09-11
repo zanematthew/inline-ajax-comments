@@ -44,8 +44,8 @@
     }
 
 .inline-comments-container textarea {
-    height: 17px;
-    min-height: 17px;
+    height: 32px;
+    min-height: 32px;
     width: 80%;
     resize: none;
     overflow: auto;

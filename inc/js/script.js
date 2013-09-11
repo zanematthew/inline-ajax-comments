@@ -117,7 +117,7 @@ jQuery(document).ready(function( $ ){
         event.preventDefault();
         if ( $( this ).hasClass('inline-comments-more-open') ){
             $( 'a', this ).html('more');
-            $('#comment').css('height', '0');
+            $('#comment').css('height', '32');
         } else {
             $( 'a', this ).html('less');
             $('#comment').css('height', '150');
