@@ -1,5 +1,5 @@
 === Inline Ajax Comments ===
-Contributors: ZaneMatthew
+Contributors: ZaneMatthew, Matthew McFarland
 Donate link: http://zanematthew.com/
 Tags: comments, ajax, inline
 Requires at least: 3.6
@@ -58,6 +58,12 @@ At the moment no, later versions might.
 * Check settings
 
 == Changelog ==
+
+= 1.2.4.2 =
+* Fix: Changed "user_nicename" (deprecated) to "display_name"
+
+= 1.2.4m =
+* Tweak: Changed min-height from 17 to 32
 
 = 1.2.2 =
 * Tweak: Improved reliability in css classes by user role
