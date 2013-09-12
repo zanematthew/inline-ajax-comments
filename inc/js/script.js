@@ -115,18 +115,41 @@ jQuery(document).ready(function( $ ){
         }
     }
 
-    $( document ).on('click', '.inline-comments-more-handle', function( event ){
-        event.preventDefault();
-        if ( $( this ).hasClass('inline-comments-more-open') ){
+	$('.inline-comments-more-handle').click(function(){
+		event.preventDefault();
+		//Get the post id
+		var full_id = this.id;
+		var explode_post_id = full_id.split("_",2);
+		var post_id = explode_post_id[1];
+		console.log (post_id);
+ 
+		if ( $( this ).hasClass('inline-comments-more-open_'+post_id) ){
+            $( 'a', this ).html('●●●');
+            $('#comment_'+post_id).css('height', '32');
+        } else {
+            $( 'a', this ).html('↑↑↑');
+            $('#comment_'+post_id).css('height', '150');
+        }
+			$( this ).toggleClass('inline-comments-more-open_'+post_id);
+			$('#inline-comments-more-container_'+post_id).toggle();
+	
+		
+	
+	});
+	/*
+    window.inline-comments-more-toggle = function(post_id){
+		
+        if ( $( this ).hasClass('inline-comments-more-open_'+post_id) ){
             $( 'a', this ).html('●●●');
             $('#comment').css('height', '32');
         } else {
             $( 'a', this ).html('↑↑↑');
             $('#comment').css('height', '150');
         }
-        $( this ).toggleClass('inline-comments-more-open');
-        $('.inline-comments-more-container').toggle();
-    });
+        $( this ).toggleClass('inline-comments-more-open_'+post_id);
+        $('#inline-comments-more-container_'+post_id).toggle();
+    }
+	*/
 });
 
  
