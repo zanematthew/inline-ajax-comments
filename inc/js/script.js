@@ -118,10 +118,10 @@ jQuery(document).ready(function( $ ){
     $( document ).on('click', '.inline-comments-more-handle', function( event ){
         event.preventDefault();
         if ( $( this ).hasClass('inline-comments-more-open') ){
-            $( 'a', this ).html('more');
+            $( 'a', this ).html('●●●');
             $('#comment').css('height', '32');
         } else {
-            $( 'a', this ).html('less');
+            $( 'a', this ).html('↑↑↑');
             $('#comment').css('height', '150');
         }
         $( this ).toggleClass('inline-comments-more-open');
