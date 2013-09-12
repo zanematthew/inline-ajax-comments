@@ -31,8 +31,8 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
     <?php if ( get_option('comment_registration') != 1 || is_user_logged_in() ) : ?>
         <div class="inline-comments-content inline-comments-content-comment-fields">
             <div class="inline-comments-p">
-                <form action="javascript://" method="POST" id="default_add_comment_form_<?php echo $post->ID; ?>">
-                    <input type="hidden" name="inline_comments_nonce_<?php echo $post->ID; ?>" value="<?php print wp_create_nonce('inline_comments_nonce'); ?>" id="inline_comments_nonce" />
+                <form action="javascript://" method="POST" id="default_add_comment_form-<?php echo $post->ID; ?>" class="default-add-comment-form">
+                    <input type="hidden" name="inline_comments_nonce_<?php echo $post->ID; ?>" value="<?php print wp_create_nonce('inline_comments_nonce_'.$post->ID); ?>" id="inline_comments_nonce_<?php echo $post->ID; ?>" />
                     <?php inline_comments_profile_pic(); ?>
                     <textarea placeholder="Press enter to submit comment&#8230;" tabindex="4" id="comment_<?php echo $post->ID; ?>" name="comment" id="inline-comments-textarea" class="inline-comments-auto-expand submit-on-enter"></textarea>
                     <span id ="inline-comments-more-handle_<?php echo $post->ID; ?>" class="inline-comments-more-handle"><a href="#">●●●</a></span>

@@ -70,8 +70,10 @@ function inline_comments_head(){
  * @uses get_option()
  */
 function inline_comments_add_comment(){
-
-    check_ajax_referer('inline_comments_nonce', 'security');
+	echo "Commentss";
+	echo "1212";
+	
+    //check_ajax_referer('inline_comments_nonce_'+$_POST['post_id'], 'security');
 
     $comment = trim(
             wp_kses( $_POST['comment'],
