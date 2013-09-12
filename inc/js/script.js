@@ -79,23 +79,25 @@ jQuery(document).ready(function( $ ){
         }
     });
 
-    $( window ).load(function(){
-        if ( $( '#inline_comments_ajax_handle' ).length ) {
+
+    window.inline_comments_ajax_load = function(post_id){
+		console.log("load comments for post "+post_id+"...");
+        if ( $( '#inline_comments_ajax_handle_'+post_id ).length ) {
             $( '.inline-comments-loading-icon').show();
 
             data = {
                 "action": "inline_comments_load_template",
                 "target_div": "#inline_comments_ajax_target",
                 "template": $( '#inline_comments_ajax_handle' ).attr( 'data-template' ),
-                "post_id": $( '#inline_comments_ajax_handle' ).attr( 'data-post_id' ),
+                "post_id": post_id,
                 "security": $('#inline_comments_nonce').val()
             };
-
+			console.log("loading comments for post: "+data.post_id);
             $.ajax({
                 data: data,
                 success: function( msg ){
                     $( '.inline-comments-loading-icon').fadeOut();
-					$( "#inline_comments_ajax_target_"+data.post_id).fadeIn().html( msg ); // Give a smooth fade in effect
+					$( "#inline_comments_ajax_target_"+post_id).fadeIn().html( msg ); // Give a smooth fade in effect
                     if ( location.hash ){
                         $('html, body').animate({
                             scrollTop: $( location.hash ).offset().top
@@ -111,7 +113,7 @@ jQuery(document).ready(function( $ ){
                 $( comment_id ).addClass('inline-comments-highlight');
             });
         }
-    });
+    }
 
     $( document ).on('click', '.inline-comments-more-handle', function( event ){
         event.preventDefault();
@@ -126,3 +128,5 @@ jQuery(document).ready(function( $ ){
         $('.inline-comments-more-container').toggle();
     });
 });
+
+ 

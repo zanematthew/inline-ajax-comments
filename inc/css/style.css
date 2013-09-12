@@ -105,6 +105,8 @@
     border: 1px solid #BBB;
     font: normal 13px/1.3em Helvetica, sans-serif, arial;
     padding: 6px;
+	width:100%;
+	width:auto;
     }
 
 .inline-comments-more-container .inline-comments-field input[type="text"],

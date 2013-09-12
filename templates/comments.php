@@ -23,8 +23,8 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
 ?>
 
 <noscript>JavaScript is required to load the comments.</noscript>
-<div class="inline-comments-container" name="comments" onLoad="inline_comments_ajax_load">
-    <div id="inline_comments_ajax_handle" class="last-child" data-post_id="<?php echo $post->ID; ?>">
+<div onLoad="" class="inline-comments-container_<?php echo $post->ID; ?>" name="comments" >
+    <div id="inline_comments_ajax_handle_<?php echo $post->ID; ?>" class="last-child" data-post_id="<?php echo $post->ID; ?>">
     <div id="inline_comments_ajax_target_<?php echo $post->ID; ?>" style="display: none;" ></div>
     <div class="inline-comments-loading-icon">Loading Comments&#8230;</div>
     <input type="hidden" name="inline_comments_nonce" value="<?php print wp_create_nonce('inline_comments_nonce'); ?>" id="inline_comments_nonce" />
@@ -35,7 +35,7 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
                     <input type="hidden" name="inline_comments_nonce" value="<?php print wp_create_nonce('inline_comments_nonce'); ?>" id="inline_comments_nonce" />
                     <?php inline_comments_profile_pic(); ?>
                     <textarea placeholder="Press enter to submit comment&#8230;" tabindex="4" id="comment" name="comment" id="inline-comments-textarea" class="inline-comments-auto-expand submit-on-enter"></textarea>
-                    <span class="inline-comments-more-handle"><a href="#">more</a></span>
+                    <span class="btn btn-large inline-comments-more-handle"><a href="#">●●● </a></span>
                     <div class="inline-comments-more-container" <?php if ( $user_email != null && isset( $keep_open ) && $keep_open != "on" ) : ?>style="display: none;"<?php endif; ?>>
                         <div class="inline-comments-allowed-tags-container">
                             Allowed <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:
@@ -53,5 +53,10 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
             <p>Please <?php echo wp_register('','', false); ?> or <a href="<?php print wp_login_url(); ?>" class="inline-comments-login-handle">Login</a> to leave Comments</p>
         </div>
     <?php endif; ?>
-</div>
+	</div>
+<script>
+	jQuery(document).ready(function(){
+		inline_comments_ajax_load(<?php echo $post->ID; ?>)
+		});
+</script>
 </div>
