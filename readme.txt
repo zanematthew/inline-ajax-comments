@@ -59,6 +59,8 @@ At the moment no, later versions might.
 
 == Changelog ==
 
+* Bug: Fixed "keep on" setting
+
 = 1.2.2 =
 * Tweak: Improved reliability in css classes by user role
 
