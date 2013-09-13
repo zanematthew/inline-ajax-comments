@@ -67,6 +67,8 @@ At the moment no, later versions might.
 * Enhanced: swapped more/less buttons with graphics
 * Tweak: More/Less stays on the same line as the input box at smallest browser widths for responsiveness
 
+TODO: implement multi-listing wp_nonce functionality.
+
 = 1.2.4.3m =
 * Fix: Allow for use ANYWHERE 
 
