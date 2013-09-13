@@ -5,8 +5,8 @@
  * Plugin URI: http://zanematthew.com/blog/plugins/inline-comments/
  * Description: Displays a single line textarea for entering comments, users can press "enter/return", and comments are loaded and submitted via AJAX.
  * Tags: comments, ajax, security, ajax comments, comment, inline, comment form
- * Version: 1.2.1
- * Author: ZaneMatthew
+ * Version: 1.2.4.5.m
+ * Author: ZaneMatthew, Matt McFarland
  * Author URI: http://zanematthew.com/
  * License: GPL
  */
