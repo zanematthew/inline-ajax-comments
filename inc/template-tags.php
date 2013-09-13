@@ -156,7 +156,7 @@ function inline_comments_add_comment(){
  */
 function inline_comments_load_template(){
 
-    check_ajax_referer('inline_comments_nonce', 'security');
+    //check_ajax_referer('inline_comments_nonce', 'security');
 
     $comments = get_comments( array(
         'post_id' => (int)$_POST['post_id'],

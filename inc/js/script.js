@@ -18,7 +18,7 @@ jQuery(document).ready(function( $ ){
         var request_in_process = false;
 
         params.action = "inline_comments_load_template";
-
+		console.log (msg);
         $.ajax({
             data: params,
             global: my_global,
@@ -64,7 +64,7 @@ jQuery(document).ready(function( $ ){
 		console.log ("---end");
 		
 		console.log ("target_div: "+"#inline_comments_ajax_target_"+post_id);
-		console.log ("template: " + $( '#inline_comments_ajax_handle_'+post_id ).attr( 'data-template' ));
+		console.log ("template: " + $( '#inline_comments_ajax_handle' ).attr( 'data-template' ));
 		console.log ("post_id: " + post_id);
 		console.log ("security: " + $( '#inline_comments_nonce_'+post_id ).val());
         $.ajax({
@@ -73,9 +73,9 @@ jQuery(document).ready(function( $ ){
             success: function( msg ){
                 inline_comments_ajax_load_template({
                     "target_div": "#inline_comments_ajax_target_"+post_id,
-                    "template": $( '#inline_comments_ajax_handle_'+post_id ).attr( 'data-template' ),
+                    "template": $( '#inline_comments_ajax_handle' ).attr( 'data-template' ),
                     "post_id": post_id,
-                    "security": $( '#inline_comments_nonce_'+post_id ).val()
+                    "security": $( 'inline_comments_nonce_' +post_id).val()
                 }, false );
                 $('textarea').val('');
                 $this.css('opacity','1');
@@ -120,10 +120,10 @@ jQuery(document).ready(function( $ ){
 
             data = {
                 "action": "inline_comments_load_template",
-                "target_div": "#inline_comments_ajax_target",
-                "template": $( '#inline_comments_ajax_handle' ).attr( 'data-template' ),
+                "target_div": '#inline_comments_ajax_target_'+post_id,
+                "template": $( '#inline_comments_ajax_handle').attr( 'data-template' ),
                 "post_id": post_id,
-                "security": $('#inline_comments_nonce').val()
+                "security": $('#inline_comments_nonce_'+post_id).val()
             };
 			console.log("loading comments for post: "+data.post_id);
             $.ajax({

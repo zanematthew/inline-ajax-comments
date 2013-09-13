@@ -59,6 +59,14 @@ At the moment no, later versions might.
 
 == Changelog ==
 
+= 1.2.4.5m =
+* Fix: unique target id's added
+* Fix: ajax loading multiple comment lists
+* Fix: ajax submit multiple comment lists
+* Fix: more/less buttons work on multiple comment lists
+* Enhanced: swapped more/less buttons with graphics
+* Tweak: More/Less stays on the same line as the input box at smallest browser widths for responsiveness
+
 = 1.2.4.3m =
 * Fix: Allow for use ANYWHERE 
 

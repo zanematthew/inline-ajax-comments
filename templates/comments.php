@@ -4,6 +4,7 @@
  * Our comments form template, the comments loop is loaded via html from inline_comments_load_template()
  */
 if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly' );
+
 ?>
 <?php
     $name = 'Name&#8230';
@@ -24,7 +25,7 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
 
 <noscript>JavaScript is required to load the comments.</noscript>
 <div class="inline-comments-container" id="inline-comments-container_<?php echo $post->ID; ?>" name="comments" >
-    <div id="inline_comments_ajax_handle_<?php echo $post->ID; ?>" class="last-child" data-post_id="<?php echo $post->ID; ?>">
+    <div id="inline_comments_ajax_handle_<?php echo $post->ID; ?>" id="inline_comments_ajax_handle" class="inline_comments_ajax_handle last-child" data-post_id="<?php echo $post->ID; ?>">
     <div id="inline_comments_ajax_target_<?php echo $post->ID; ?>" style="display: none;" ></div>
     <div class="inline-comments-loading-icon">Loading Comments&#8230;</div>
     <input type="hidden" name="inline_comments_nonce" value="<?php print wp_create_nonce('inline_comments_nonce'); ?>" id="inline_comments_nonce" />
