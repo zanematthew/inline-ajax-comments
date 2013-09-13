@@ -18,7 +18,7 @@ jQuery(document).ready(function( $ ){
         var request_in_process = false;
 
         params.action = "inline_comments_load_template";
-		console.log (msg);
+		
         $.ajax({
             data: params,
             global: my_global,
