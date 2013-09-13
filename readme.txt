@@ -42,7 +42,10 @@ At the moment it does, [Google Ajax Crawling](https://developers.google.com/webm
 Yes
 
 = Does this work on Pages? =
-No
+Yes
+
+= Can this be used on pages with multiple comment listings? =
+Yes
 
 = Does this support paging? =
 At the moment no, later versions might.
