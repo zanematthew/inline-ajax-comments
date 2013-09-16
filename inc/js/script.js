@@ -35,7 +35,7 @@ jQuery(document).ready(function( $ ){
     /**
      * Submit new comment, note comments are loaded via ajax
      */
-     $('.default-add-comment-form').submit(function() {
+     $('.default-add-comment-form').on( "submit",function() {
         event.preventDefault();
 
         var $this = $(this);
@@ -94,7 +94,7 @@ jQuery(document).ready(function( $ ){
      * Allow Comment form to be submitted when the user
      * presses the "enter" key.
      */
-	$('.default-add-comment-form').keypress(function (e) {
+	$(document).on('keypress', '.default-add-comment-form',function (e) {
 	  if (e.which == 13) {
 		console.log ("Enter Key Pressed - Submitting form");
 		
@@ -148,7 +148,7 @@ jQuery(document).ready(function( $ ){
         }
     }
 
-	$('.inline-comments-more-handle').click(function(){
+	$('.inline-comments-more-handle').on('click', function(){
 		event.preventDefault();
 		//Get the post id
 		var full_id = this.id;
@@ -158,10 +158,10 @@ jQuery(document).ready(function( $ ){
  
 		if ( $( this ).hasClass('inline-comments-more-open_'+post_id) ){
             $( 'a', this ).html('●●●');
-            $('#comment_'+post_id).css('height', '32');
+            $('#comment_'+post_id).animate({height: '32'},250);
         } else {
             $( 'a', this ).html('↑↑↑');
-            $('#comment_'+post_id).css('height', '150');
+             $('#comment_'+post_id).animate({height: '100'},250);
         }
 			$( this ).toggleClass('inline-comments-more-open_'+post_id);
 			$('#inline-comments-more-container_'+post_id).toggle();
