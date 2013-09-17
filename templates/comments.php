@@ -56,8 +56,11 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
     <?php endif; ?>
 	</div>
 </div>
-<script>
-	jQuery(document).ready(function(){
+<script class="inline-comments-script" >
+	console.log ('<?php echo $post->ID; ?>' + 'has loaded...');
+	var tid_<?php echo $post->ID; ?> = setInterval( function () {
+    if ( document.readyState !== 'complete' ) return;
+		clearInterval( tid_<?php echo $post->ID; ?> );       
 		inline_comments_ajax_load(<?php echo $post->ID; ?>)
-		});
+	}, 100 );	
 </script>

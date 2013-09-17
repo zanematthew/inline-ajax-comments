@@ -35,7 +35,7 @@ jQuery(document).ready(function( $ ){
     /**
      * Submit new comment, note comments are loaded via ajax
      */
-     $('.default-add-comment-form').on( "submit",function() {
+     $( document ).on('submit','.default-add-comment-form',function( e ) {
         event.preventDefault();
 
         var $this = $(this);
@@ -97,7 +97,8 @@ jQuery(document).ready(function( $ ){
 	$(document).on('keypress', '.default-add-comment-form',function (e) {
 	  if (e.which == 13) {
 		console.log ("Enter Key Pressed - Submitting form");
-		
+		console.log (this);
+		console.log ($(this));
 		$(this).submit();
 		return false;
 	  }
@@ -148,7 +149,7 @@ jQuery(document).ready(function( $ ){
         }
     }
 
-	$('.inline-comments-more-handle').on('click', function(){
+	$( document ).on('click','.inline-comments-more-handle', function( e ){
 		event.preventDefault();
 		//Get the post id
 		var full_id = this.id;
@@ -157,9 +158,9 @@ jQuery(document).ready(function( $ ){
 		console.log (post_id);
  
 		if ( $( this ).hasClass('inline-comments-more-open_'+post_id) ){
-            $( 'a', this ).html('●●●');
-            $('#comment_'+post_id).animate({height: '32'},250);
-        } else {
+            		$( 'a', this ).html('●●●');
+           		 $('#comment_'+post_id).animate({height: '32'},250);
+       			 } else {
             $( 'a', this ).html('↑↑↑');
              $('#comment_'+post_id).animate({height: '100'},250);
         }
@@ -169,6 +170,9 @@ jQuery(document).ready(function( $ ){
 		
 	
 	});
+	
+	
+
 	/*
     window.inline-comments-more-toggle = function(post_id){
 		
@@ -185,4 +189,36 @@ jQuery(document).ready(function( $ ){
 	*/
 });
 
- 
+
+// BETA: If newly loaded Ajax content has javascript then execute.
+// This helps inline-ajax-comments work if loaded by something like Infinite Scroll.
+// You MUST run this callback after ajax success. see jQuery docs.
+
+function ajaxLoadedCallback() {
+    scriptx = document.getElementsByTagName("script");
+
+
+    scripts = new Array();
+    for (var idx=0; idx<scriptx.length; idx++) {
+  
+		if (jQuery(scriptx[idx]).is(".inline-comments-script")) {
+			scripts.push(scriptx[idx].innerHTML);
+		}
+
+	}
+   
+      // execute each script in turn
+      for(idx=0; idx<scripts.length; ++idx) {
+		var content = scripts[idx];
+	        if (content.length) {
+	            try {
+              // create a function for the script & execute it
+              f = new Function(content);
+              f();
+            } catch(se) {
+                 
+            } // end try-catch
+         } // end if
+      } // end for
+	  
+}
