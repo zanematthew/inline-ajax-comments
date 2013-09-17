@@ -62,6 +62,14 @@ At the moment no, later versions might.
 
 == Changelog ==
 
+= 1.2.5m =
+* Fix: Works when ajax loaded (by infinite scroll)
+* Enhance: use sliding effect on more/less
+
+INFINITE SCROLL:
+
+Whatever infinite scroll function you are using, you must make sure that you add ajaxLoadedCallback() to its callback.  If you are not sure how to do this please contact us.
+
 = 1.2.4.5m =
 * Fix: unique target id's added
 * Fix: ajax loading multiple comment lists
