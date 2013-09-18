@@ -44,9 +44,9 @@
     }
 
 .inline-comments-container textarea {
-    height: 17px;
-    min-height: 17px;
-    width: 80%;
+    height: 32px;
+    min-height: 32px;
+    width: 72%;
     resize: none;
     overflow: auto;
     vertical-align: top;
@@ -87,10 +87,16 @@
     }
 
 .inline-comments-more-handle a {
+	float:right;
     font-weight: bold;
     left: 5px;
     position: relative;
-    text-transform: uppercase;
+    font-size:1.44em;
+	
+	width:12%;
+    }
+.inline-comments-more-handle a:hover {
+		text-decoration:none;
     }
 
 
@@ -109,7 +115,7 @@
 
 .inline-comments-more-container .inline-comments-field input[type="text"],
 .inline-comments-more-container .inline-comments-field input[type="email"],
-.inline-comments-more-container .inline-comments-field input[type="url"] {margin: 5px 0 0; width: 127px;}
+.inline-comments-more-container .inline-comments-field input[type="url"] {margin: 5px 0 0; max-width: 127px; font-size:12px;}
 
 
 .inline-comments-content input[type="text"]:hover,

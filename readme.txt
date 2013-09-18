@@ -1,5 +1,5 @@
 === Inline Ajax Comments ===
-Contributors: ZaneMatthew
+Contributors: ZaneMatthew, Matthew McFarland
 Donate link: http://zanematthew.com/
 Tags: comments, ajax, inline
 Requires at least: 3.6
@@ -42,7 +42,10 @@ At the moment it does, [Google Ajax Crawling](https://developers.google.com/webm
 Yes
 
 = Does this work on Pages? =
-No
+Yes
+
+= Can this be used on pages with multiple comment listings? =
+Yes
 
 = Does this support paging? =
 At the moment no, later versions might.
@@ -60,6 +63,33 @@ At the moment no, later versions might.
 == Changelog ==
 
 * Bug: Fixed "keep on" setting
+
+= 1.2.5m =
+* Fix: Works when ajax loaded (by infinite scroll)
+* Enhance: use sliding effect on more/less
+
+INFINITE SCROLL:
+
+Whatever infinite scroll function you are using, you must make sure that you add ajaxLoadedCallback() to its callback.  If you are not sure how to do this please contact us.
+
+= 1.2.4.5m =
+* Fix: unique target id's added
+* Fix: ajax loading multiple comment lists
+* Fix: ajax submit multiple comment lists
+* Fix: more/less buttons work on multiple comment lists
+* Enhanced: swapped more/less buttons with graphics
+* Tweak: More/Less stays on the same line as the input box at smallest browser widths for responsiveness
+
+TODO: implement multi-listing wp_nonce functionality.
+
+= 1.2.4.3m =
+* Fix: Allow for use ANYWHERE 
+
+= 1.2.4.2m =
+* Fix: Changed "user_nicename" (deprecated) to "display_name"
+
+= 1.2.4m =
+* Tweak: Changed min-height from 17 to 32
 
 = 1.2.2 =
 * Tweak: Improved reliability in css classes by user role
