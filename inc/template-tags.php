@@ -237,7 +237,7 @@ function inline_comments_options( $key=null, $value=null ){
                 'label' => 'More/Less'
                 );
 
-    $options['custom_more']['mobile_ui'] = array(
+    $options['custom_more']['modern'] = array(
                 'more' => '&bull;&bull;&bull;',
                 'less' => '&#8593;&#8593;&#8593;',
                 'label' => '&bull;&bull;&bull; / &#8593;&#8593;&#8593;'
