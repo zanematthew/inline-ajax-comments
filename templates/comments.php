@@ -14,6 +14,8 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
     $user_website = null;
     $user_name = null;
     $keep_open = get_option('keep_open');
+    $custom_more = get_option('custom_more');
+    $more = inline_comments_options( 'custom_more', empty( $custom_more ) ? 'default' : $custom_more );
 
     if ( is_user_logged_in() ){
         $current_user = wp_get_current_user();
@@ -36,7 +38,7 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
                     <input type="hidden" name="inline_comments_nonce_<?php echo $post->ID; ?>" value="<?php print wp_create_nonce('inline_comments_nonce_'.$post->ID); ?>" id="inline_comments_nonce_<?php echo $post->ID; ?>" />
                     <?php inline_comments_profile_pic(); ?>
                     <textarea placeholder="Press enter to submit comment&#8230;" tabindex="4" id="comment_<?php echo $post->ID; ?>" name="comment" id="inline-comments-textarea" class="inline-comments-auto-expand submit-on-enter"></textarea>
-                    <span id ="inline-comments-more-handle_<?php echo $post->ID; ?>" class="inline-comments-more-handle"><a href="#">●●●</a></span>
+                    <span id ="inline-comments-more-handle_<?php echo $post->ID; ?>" class="inline-comments-more-handle"><a href="#"><?php echo $more['more']; ?></a></span>
                     <div id = "inline-comments-more-container_<?php echo $post->ID; ?>" class="inline-comments-more-container" <?php if ( $user_email != null && isset( $keep_open ) && $keep_open != "on" ) : ?>style="display: none;"<?php endif; ?>>
                         <div id="inline-comments-allowed-tags-container_<?php echo $post->ID; ?>" class="inline-comments-allowed-tags-container">
                             Allowed <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:
@@ -60,7 +62,7 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
 	console.log ('<?php echo $post->ID; ?>' + 'has loaded...');
 	var tid_<?php echo $post->ID; ?> = setInterval( function () {
     if ( document.readyState !== 'complete' ) return;
-		clearInterval( tid_<?php echo $post->ID; ?> );       
+		clearInterval( tid_<?php echo $post->ID; ?> );
 		inline_comments_ajax_load(<?php echo $post->ID; ?>)
-	}, 100 );	
+	}, 100 );
 </script>

@@ -17,6 +17,17 @@
                     <textarea name="additional_styling" id="additional_styling" rows="10" cols="80" class="code"><?php print wp_kses( get_option('additional_styling'),'' ); ?></textarea>
                 </td>
             </tr>
+            <tr valign="top">
+                <th scope="row">Custom More/Less</th>
+                <td>
+                    <select name="custom_more" id="custom_more">
+                        <?php foreach( inline_comments_options('custom_more') as $k => $v ) : ?>
+                            <option value="<?php echo $k; ?>" <?php selected( get_option('custom_more'), $k ); ?>><?php echo $v['label']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+            </tr>
+
         </table>
         <p class="submit"><input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save Changes'); ?>" /></p>
     </form>

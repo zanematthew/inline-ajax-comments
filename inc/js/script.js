@@ -7,7 +7,7 @@ jQuery(document).ready(function( $ ){
      */
     $.ajaxSetup({
         type: "POST",
-        url: ajaxurl,
+        url: _inline_comments.ajaxurl,
         dataType: "html"
     });
 
@@ -18,7 +18,7 @@ jQuery(document).ready(function( $ ){
         var request_in_process = false;
 
         params.action = "inline_comments_load_template";
-		
+
         $.ajax({
             data: params,
             global: my_global,
@@ -62,7 +62,7 @@ jQuery(document).ready(function( $ ){
 		console.log ("* comment: "+data.comment);
 		console.log ("* security: "+data.security);
 		console.log ("---end");
-		
+
 		console.log ("target_div: "+"#inline_comments_ajax_target_"+post_id);
 		console.log ("template: " + $( '#inline_comments_ajax_handle' ).attr( 'data-template' ));
 		console.log ("post_id: " + post_id);
@@ -104,7 +104,7 @@ jQuery(document).ready(function( $ ){
 	  }
 	});
 
-	 
+
 	 /*
     $( document ).on('keypress', '#default_add_comment_form textarea, #default_add_comment_form input', function( event ){
         if ( event.keyCode == '13' ) {
@@ -156,26 +156,22 @@ jQuery(document).ready(function( $ ){
 		var explode_post_id = full_id.split("_",2);
 		var post_id = explode_post_id[1];
 		console.log (post_id);
- 
+
 		if ( $( this ).hasClass('inline-comments-more-open_'+post_id) ){
-            		$( 'a', this ).html('●●●');
+            	$( 'a', this ).html( _inline_comments.custom_more.more );
            		 $('#comment_'+post_id).animate({height: '32'},250);
        			 } else {
-            $( 'a', this ).html('↑↑↑');
+            $( 'a', this ).html( _inline_comments.custom_more.less );
              $('#comment_'+post_id).animate({height: '100'},250);
         }
 			$( this ).toggleClass('inline-comments-more-open_'+post_id);
 			$('#inline-comments-more-container_'+post_id).toggle();
-	
-		
-	
 	});
-	
-	
+
 
 	/*
     window.inline-comments-more-toggle = function(post_id){
-		
+
         if ( $( this ).hasClass('inline-comments-more-open_'+post_id) ){
             $( 'a', this ).html('●●●');
             $('#comment').css('height', '32');
@@ -200,13 +196,13 @@ function ajaxLoadedCallback() {
 
     scripts = new Array();
     for (var idx=0; idx<scriptx.length; idx++) {
-  
+
 		if (jQuery(scriptx[idx]).is(".inline-comments-script")) {
 			scripts.push(scriptx[idx].innerHTML);
 		}
 
 	}
-   
+
       // execute each script in turn
       for(idx=0; idx<scripts.length; ++idx) {
 		var content = scripts[idx];
@@ -216,9 +212,9 @@ function ajaxLoadedCallback() {
               f = new Function(content);
               f();
             } catch(se) {
-                 
+
             } // end try-catch
          } // end if
       } // end for
-	  
+
 }
