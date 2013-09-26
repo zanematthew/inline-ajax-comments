@@ -27,11 +27,9 @@ add_action('plugins_loaded', 'inline_comments_loaded');
  * @since 0.1-alpha
  */
 function inline_comments_template_redirect() {
-    if ( is_singular() || is_page() ) {
         add_action( 'wp_enqueue_scripts', 'inline_comments_scripts');
         add_action( 'wp_head', 'inline_comments_head');
-    }
-}
+ }
 
 
 /**
@@ -45,6 +43,14 @@ function inline_comments_template_redirect() {
 function inline_comments_scripts(){
     wp_enqueue_script( 'inline-ajax-comments-script' );
     wp_enqueue_style( 'inline-ajax-comments-style' );
+    wp_localize_script(
+        'inline-ajax-comments-script',
+        '_inline_comments',
+        array(
+            'custom_more' => inline_comments_options( 'custom_more', get_option('custom_more') ),
+            'ajaxurl' => admin_url("admin-ajax.php")
+            )
+        );
 }
 
 
@@ -54,7 +60,6 @@ function inline_comments_scripts(){
  * @since 0.1-alpha
  */
 function inline_comments_head(){
-    print '<script type="text/javascript"> var ajaxurl = "'. admin_url("admin-ajax.php") .'";</script>';
     print '<style type="text/css">'.get_option('additional_styling').'</style>';
 }
 
@@ -72,8 +77,10 @@ function inline_comments_head(){
  * @uses get_option()
  */
 function inline_comments_add_comment(){
+	echo "Commentss";
+	echo "1212";
 
-    check_ajax_referer('inline_comments_nonce', 'security');
+    //check_ajax_referer('inline_comments_nonce_'+$_POST['post_id'], 'security');
 
     $comment = trim(
             wp_kses( $_POST['comment'],
@@ -106,15 +113,34 @@ function inline_comments_add_comment(){
         'comment_approved' => 1
     );
 
+
+    /**
+     * If user logged in build our array of info
+     */
     if ( is_user_logged_in() ){
         $current_user = wp_get_current_user();
 
         $author_email = $current_user->user_email;
         $author_url = $current_user->user_url;
-        $author_name = $current_user->user_nicename;
+        $author_name = $current_user->display_name;
 
         $data['user_id'] = $current_user->ID;
-    } else {
+    }
+
+    /**
+     * Or by email
+     */
+    elseif( $user = get_user_by( 'email', $_POST['user_email'] ) ) {
+        $data['user_id'] = $user->data->ID;
+        $author_email = $user->data->user_email;
+        $author_url = $user->data->user_url;
+        $author_name = $user->data->display_name;
+    }
+
+    /**
+     * Or do the following
+     */
+    else {
         $author_email = empty( $_POST['user_email'] ) ? null : esc_attr( $_POST['user_email'] );
         $author_url = empty( $_POST['user_url'] ) ? null : esc_url( $_POST['user_url'], array('http','https') );
         $author_name = empty( $_POST['user_name'] ) ? null : esc_attr( $_POST['user_name'] );
@@ -137,7 +163,7 @@ function inline_comments_add_comment(){
  */
 function inline_comments_load_template(){
 
-    check_ajax_referer('inline_comments_nonce', 'security');
+    //check_ajax_referer('inline_comments_nonce', 'security');
 
     $comments = get_comments( array(
         'post_id' => (int)$_POST['post_id'],
@@ -202,3 +228,28 @@ function inline_comments_tempalte( $file ){
     return plugin_dir_path( dirname( __FILE__ ) ) . 'templates/comments.php';
 }
 add_filter('comments_template', 'inline_comments_tempalte');
+
+
+function inline_comments_options( $key=null, $value=null ){
+    $options['custom_more']['default'] = array(
+                'more' => 'more',
+                'less' => 'less',
+                'label' => 'More/Less'
+                );
+
+    $options['custom_more']['modern'] = array(
+                'more' => '&bull;&bull;&bull;',
+                'less' => '&#8593;&#8593;&#8593;',
+                'label' => '&bull;&bull;&bull; / &#8593;&#8593;&#8593;'
+            );
+
+    if ( empty( $key ) ){
+        return $option;
+    } elseif ( ! empty( $value ) ){
+        return $options[ $key ][ $value ];
+    } else {
+        return $options[ $key ];
+    }
+}
+
+
