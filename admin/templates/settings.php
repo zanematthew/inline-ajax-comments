@@ -7,7 +7,7 @@
             <tr valign="top">
                 <th scope="row">Keep Open</th>
                 <td>
-                    <input type="checkbox" name="keep_open" id="keep_open" class="regular-text" <?php checked( get_option('keep_open'), 'on' ); ?> />
+                    <input type="checkbox" name="keep_open" id="keep_open" <?php checked( get_option('keep_open'), 'on' ); ?> />
                     <p class="description">Check this to keep the additional info fields displayed</p>
                 </td>
             </tr>
