@@ -26,7 +26,7 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
 ?>
 
 <noscript>JavaScript is required to load the comments.</noscript>
-<div class="inline-comments-container" id="inline-comments-container_<?php echo $post->ID; ?>" name="comments" >
+<div class="inline-comments-container inline-comments-more-<?php echo $more['class']; ?>" id="inline-comments-container_<?php echo $post->ID; ?>" name="comments" >
     <div id="inline_comments_ajax_handle_<?php echo $post->ID; ?>" id="inline_comments_ajax_handle" class="inline_comments_ajax_handle last-child" data-post_id="<?php echo $post->ID; ?>">
     <div id="inline_comments_ajax_target_<?php echo $post->ID; ?>" style="display: none;" ></div>
     <div class="inline-comments-loading-icon">Loading Comments&#8230;</div>
