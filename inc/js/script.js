@@ -43,7 +43,6 @@ jQuery(document).ready(function( $ ){
 		var full_id = this.id;
 		var explode_post_id = full_id.split("-",2);
 		var post_id = explode_post_id[1];
-		console.log ("posting a comment for post id: #"+post_id);
 
         data = {
             action: "inline_comments_add_comment",
@@ -54,19 +53,7 @@ jQuery(document).ready(function( $ ){
             comment: $( '#comment_'+post_id ).val(),
             security: $('#inline_comments_nonce_'+post_id).val()
         };
-		console.log ("data stream(var array data):");
-		console.log ("* action: "+data.action);
-		console.log ("* post_id: "+data.post_id);
-		console.log ("* user_name: "+data.user_name);
-		console.log ("* user_url: "+data.user_url);
-		console.log ("* comment: "+data.comment);
-		console.log ("* security: "+data.security);
-		console.log ("---end");
 
-		console.log ("target_div: "+"#inline_comments_ajax_target_"+post_id);
-		console.log ("template: " + $( '#inline_comments_ajax_handle' ).attr( 'data-template' ));
-		console.log ("post_id: " + post_id);
-		console.log ("security: " + $( '#inline_comments_nonce_'+post_id ).val());
         $.ajax({
             data: data,
             global: false,
@@ -81,10 +68,8 @@ jQuery(document).ready(function( $ ){
                 $this.css('opacity','1');
             },
 			fail: function(){
-				console.log("ajax failed");
 			},
 				always: function(){
-				console.log(msg);
 			}
         });
 
@@ -96,9 +81,6 @@ jQuery(document).ready(function( $ ){
      */
 	$(document).on('keypress', '.default-add-comment-form',function (e) {
 	  if (e.which == 13) {
-		console.log ("Enter Key Pressed - Submitting form");
-		console.log (this);
-		console.log ($(this));
 		$(this).submit();
 		return false;
 	  }
@@ -115,7 +97,6 @@ jQuery(document).ready(function( $ ){
 */
 
     window.inline_comments_ajax_load = function(post_id){
-		console.log("load comments for post "+post_id+"...");
         if ( $( '#inline_comments_ajax_handle_'+post_id ).length ) {
             $( '.inline-comments-loading-icon').show();
 
@@ -126,7 +107,6 @@ jQuery(document).ready(function( $ ){
                 "post_id": post_id,
                 "security": $('#inline_comments_nonce_'+post_id).val()
             };
-			console.log("loading comments for post: "+data.post_id);
             $.ajax({
                 data: data,
                 success: function( msg ){
@@ -151,21 +131,33 @@ jQuery(document).ready(function( $ ){
 
 	$( document ).on('click','.inline-comments-more-handle', function( e ){
 		event.preventDefault();
-		//Get the post id
+
+        //Get the post id
 		var full_id = this.id;
 		var explode_post_id = full_id.split("_",2);
 		var post_id = explode_post_id[1];
-		console.log (post_id);
+
+        $( '.inline-comments-more-handle a' ).toggleClass('closed');
+        $( '.inline-comments-more-handle a' ).toggleClass('open');
+
 
 		if ( $( this ).hasClass('inline-comments-more-open_'+post_id) ){
-            	$( 'a', this ).html( _inline_comments.custom_more.more );
-           		 $('#comment_'+post_id).animate({height: '32'},250);
-       			 } else {
+            // $( '.inline-comments-more-handle a' ).toggleClass('closed');
+        	$( 'a', this ).html( _inline_comments.custom_more.more );
+   		    $('#comment_'+post_id).animate({
+                height: 17
+            },
+            250);
+        } else {
+            // $( '.inline-comments-more-handle a' ).toggleClass('open');
             $( 'a', this ).html( _inline_comments.custom_more.less );
-             $('#comment_'+post_id).animate({height: '100'},250);
+            $('#comment_'+post_id).animate({
+                height: '100'
+            },
+            250);
         }
-			$( this ).toggleClass('inline-comments-more-open_'+post_id);
-			$('#inline-comments-more-container_'+post_id).toggle();
+		$( this ).toggleClass('inline-comments-more-open_'+post_id);
+		$('#inline-comments-more-container_'+post_id).toggle();
 	});
 
 

@@ -38,7 +38,7 @@ if ( !defined( 'ABSPATH' ) ) die( 'You cannot access this template file directly
                     <input type="hidden" name="inline_comments_nonce_<?php echo $post->ID; ?>" value="<?php print wp_create_nonce('inline_comments_nonce_'.$post->ID); ?>" id="inline_comments_nonce_<?php echo $post->ID; ?>" />
                     <?php inline_comments_profile_pic(); ?>
                     <textarea placeholder="Press enter to submit comment&#8230;" tabindex="4" id="comment_<?php echo $post->ID; ?>" name="comment" id="inline-comments-textarea" class="inline-comments-auto-expand submit-on-enter"></textarea>
-                    <span id ="inline-comments-more-handle_<?php echo $post->ID; ?>" class="inline-comments-more-handle"><a href="#"><?php echo $more['more']; ?></a></span>
+                    <span id ="inline-comments-more-handle_<?php echo $post->ID; ?>" class="inline-comments-more-handle"><a href="#" class="<?php echo ( isset( $keep_open ) && $keep_open != "on" ) ? 'open' : 'closed'; ?>"><?php echo $more['more']; ?></a></span>
                     <div id = "inline-comments-more-container_<?php echo $post->ID; ?>" class="inline-comments-more-container" <?php if ( $user_email != null && isset( $keep_open ) && $keep_open != "on" ) : ?>style="display: none;"<?php endif; ?>>
                         <div id="inline-comments-allowed-tags-container_<?php echo $post->ID; ?>" class="inline-comments-allowed-tags-container">
                             Allowed <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:

@@ -25,6 +25,10 @@
     max-width: 100%;
     }
 
+.inline-comments-container .meta a {
+    font-size: 11px;
+    }
+
 .inline-comments-container .inline-comments-p {
     float: left;
     font: normal 12px/1.5em helvetica, sans-serif;
@@ -44,9 +48,9 @@
     }
 
 .inline-comments-container textarea {
-    height: 32px;
-    min-height: 32px;
-    width: 72%;
+    height: 17px;
+    min-height: 17px;
+    width: 80%;
     resize: none;
     overflow: auto;
     vertical-align: top;
@@ -87,15 +91,21 @@
     }
 
 .inline-comments-more-handle a {
-	font-weight: bold;
-    left: 5px;
+    font-weight: bold;
+    left: -5px;
     position: relative;
     float: right;
+    text-align: right;
     }
 
+.inline-comments-more-modern a.closed {
+    font-size: 2.76em;
+    }
+
+.inline-comments-more-modern a.closed {}
+
 .inline-comments-more-modern a {
-    font-size:1.44em;
-    width:12%;
+    font-size: 1.44em;
     }
 
 .inline-comments-more-handle a:hover {
